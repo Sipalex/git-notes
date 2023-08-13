@@ -80,6 +80,18 @@ origin (англ. «источник») — стандартный псевдо�
 **Отправить изменения на удалённый репозиторий ** — git push
 
 
+echo "# git-notes" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:Sipalex/git-notes.git
+git push -u origin main
+
+git remote add origin git@github.com:Sipalex/git-notes.git
+git branch -M main
+git push -u origin main
+
 
 ## РАбота с  SSH
 
