@@ -211,8 +211,15 @@ graph LR;
 *Как исправить комит*
 
 
+
+Команда git restore --staged <file> переведёт файл из staged обратно в modified или untracked.
+Команда git reset --hard <commit hash> «откатит» историю до коммита с хешем <hash>. Более поздние коммиты потеряются!
+Команда git restore <file> «откатит» изменения в файле до последней сохранённой (в коммите или в staging) версии.
+
 **Как откатиться назад, если «всё сломалось»**
 Выполнить unstage изменений — git restore --staged <file>
+
+
 **Пример**
 
 
@@ -236,5 +243,39 @@ Untracked files:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 # файл example.txt из staged вернулся обратно в untracked
+
+```
+
+**«Откатить» коммит — git reset --hard <commit hash>**
+
+``` bash
+
+$ git log --oneline # хеш можно найти в истории
+7b972f5 (HEAD -> master) style: добавить комментарии, расставить отступы
+b576d89 feat: добавить массив Expenses и цикл для добавления трат # вот сюда и вернёмся
+4b58962 refactor: разделить analyzeExpenses() на countSum() и saveExpenses()
+
+$ git reset --hard b576d89
+# теперь мы на этом коммите
+HEAD is now at b576d89 feat: добавить массив Expenses и цикл для добавления трат
+
+```
+
+**«Откатить» изменения, которые не попали ни в staging, ни в коммит, — git restore <file>**
+
+``` bash
+
+# случайно изменили файл example.txt
+$ git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+          modified:   example.txt
+
+$ git restore example.txt
+$ git status
+On branch main
+nothing to commit, working tree clean
 
 ```
