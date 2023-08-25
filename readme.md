@@ -209,3 +209,32 @@ graph LR;
 # Работа над ошибками в комитах
 
 *Как исправить комит*
+
+
+** Как откатиться назад, если «всё сломалось» **
+Выполнить unstage изменений — git restore --staged <file>
+** Пример **
+
+
+``` bash
+
+
+$ touch example.txt # создали ненужный файл
+$ git add example.txt # добавили его в staged
+
+$ git status # проверили статус
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   example.txt
+
+$ git restore --staged example.txt
+$ git status # проверили статус
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        example.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+# файл example.txt из staged вернулся обратно в untracked
+
+```
